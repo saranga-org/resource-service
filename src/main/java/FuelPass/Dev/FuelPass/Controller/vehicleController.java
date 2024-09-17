@@ -21,8 +21,14 @@ public class vehicleController {
         return vehicleService.getAllVehicles();
     }
 
-    @PostMapping("saveVehicle")
+    @PostMapping("/saveVehicle")
     public VehicleDTO saveVehicle(@RequestBody VehicleDTO vehicleDTO){
         return vehicleService.saveVehicle(vehicleDTO);
     }
+
+    @DeleteMapping("/deleteVehicle")
+    public boolean deleteVehicle(@RequestBody VehicleDTO vehicleDTO){
+        return  vehicleService.deleteVehicle(vehicleDTO);
+    }
+    
 }

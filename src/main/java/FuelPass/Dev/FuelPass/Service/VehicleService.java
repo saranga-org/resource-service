@@ -39,4 +39,9 @@ public class VehicleService {
         List<Vehicle>vehicleList = vehicleRepo.findAll();
         return modelMapper.map(vehicleList, new TypeToken<List<VehicleDTO>>(){}.getType());
     }
+
+    public boolean deleteVehicle(VehicleDTO vehicleDTO){
+        vehicleRepo.delete(modelMapper.map(vehicleDTO, Vehicle.class));
+        return true;
+    }
 }
