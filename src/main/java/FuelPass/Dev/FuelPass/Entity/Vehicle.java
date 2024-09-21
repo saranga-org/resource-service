@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Vehicle {
     @Id
+    @GeneratedValue
     private int id;
 
     @Column(name = "regNO", nullable = false)

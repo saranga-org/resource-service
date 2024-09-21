@@ -20,6 +20,9 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
+    @GeneratedValue
+    private Integer id;
+
     @Column(name = "userName", nullable = false, length = 50)
     private String userName;
 
@@ -45,6 +48,10 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private Boolean isVerified;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "userName")
+    private List<Vehicle> vehicles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

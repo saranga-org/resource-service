@@ -4,6 +4,7 @@ import FuelPass.Dev.FuelPass.DTO.VehicleDTO;
 import FuelPass.Dev.FuelPass.Repo.VehicleRepo;
 import FuelPass.Dev.FuelPass.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +27,19 @@ public class vehicleController {
         return vehicleService.saveVehicle(vehicleDTO);
     }
 
-    @DeleteMapping("/deleteVehicle")
-    public boolean deleteVehicle(@RequestBody VehicleDTO vehicleDTO){
-        return  vehicleService.deleteVehicle(vehicleDTO);
+    @DeleteMapping("/deleteVehicle/{id}")
+    public ResponseEntity<String> deleteVehicle(@PathVariable Integer id){
+        try{
+            boolean isDeleted =   vehicleService.deleteVehicle(id);
+            if (isDeleted) {
+                return ResponseEntity.ok("Vehicle deleted successfully!");
+            } else {
+                return ResponseEntity.status(404).body("Vehicle not found!");
+            }
+        }catch (Exception e){
+            return ResponseEntity.status(500).body("Failed to delete vehicle: " + e.getMessage());
+        }
+
     }
     
 }

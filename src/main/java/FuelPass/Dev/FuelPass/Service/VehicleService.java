@@ -40,8 +40,13 @@ public class VehicleService {
         return modelMapper.map(vehicleList, new TypeToken<List<VehicleDTO>>(){}.getType());
     }
 
-    public boolean deleteVehicle(VehicleDTO vehicleDTO){
-        vehicleRepo.delete(modelMapper.map(vehicleDTO, Vehicle.class));
-        return true;
+    public boolean deleteVehicle(Integer id) {
+        try {
+            vehicleRepo.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Failed to delete vehicle: " + e.getMessage());
+            return false;
+        }
     }
 }
