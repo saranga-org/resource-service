@@ -25,7 +25,7 @@ public class UserVerificationController {
     }
 
     @PostMapping("/verify")
-    public Boolean verifyOtp(@RequestParam String otp) {
-        return otpVerificationService.verifyOtp(otp);
+    public ResponseEntity<Boolean> verifyOtp(@RequestParam String otp) {
+        return ResponseEntity.ok(otpVerificationService.verifyOtp(otp));
     }
 }

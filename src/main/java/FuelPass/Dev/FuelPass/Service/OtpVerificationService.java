@@ -28,8 +28,7 @@ public class OtpVerificationService {
         verifyOtpDTO.setPhoneNumber(authenticationService.getUserContactNumber());
 
         if(verificationClient.verifyOtp(verifyOtpDTO)){
-                userService.verifyUser(authenticationService.getCurrentUser());
-                return true;
+            return userService.verifyUser(authenticationService.getCurrentUser());
         }else{
             return false;
         }

@@ -15,8 +15,13 @@ public class UserService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void verifyUser(String userName){
+    public boolean verifyUser(String userName) {
         Optional<User> currentUser = userRepo.findById(userName);
-        currentUser.ifPresent(user -> user.setIsVerified(true));
+        return currentUser.map(user -> {
+            user.setIsVerified(true);
+            userRepo.save(user);
+            return true;
+        }).orElse(false);
     }
+
 }
