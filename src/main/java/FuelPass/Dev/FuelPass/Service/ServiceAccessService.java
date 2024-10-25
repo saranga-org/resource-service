@@ -47,12 +47,19 @@ public class ServiceAccessService {
         if (user.isPresent()){
             System.out.println(user.get().getRole());
             if(user.get().getRole().equals(Role.STATION_OWNER)){
-                return AuthorizationResponse.builder().authorized(true).build();
+                System.out.println(user.get().getUsername());
+                return AuthorizationResponse.builder()
+                        .userName(user.get().getUsername())
+                        .build();
             }
-            return AuthorizationResponse.builder().authorized(false).build();
+            return AuthorizationResponse.builder()
+                    .userName(null)
+                    .build();
         }
 
-        return AuthorizationResponse.builder().authorized(false).build();
+        return AuthorizationResponse.builder()
+                .userName(null)
+                .build();
     }
 
 
@@ -63,12 +70,19 @@ public class ServiceAccessService {
         if (user.isPresent()){
             System.out.println(user.get().getRole());
             if(user.get().getRole().equals(Role.USER)){
-                return AuthorizationResponse.builder().authorized(true).build();
+                System.out.println(user.get().getUsername());
+                return AuthorizationResponse.builder()
+                        .userName(user.get().getUsername())
+                        .build();
             }
-            return AuthorizationResponse.builder().authorized(false).build();
+            return AuthorizationResponse.builder()
+                    .userName(null)
+                    .build();
         }
 
-        return AuthorizationResponse.builder().authorized(false).build();
+         return AuthorizationResponse.builder()
+                 .userName(null)
+                 .build();
 
     }
 }
